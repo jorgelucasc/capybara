@@ -1,0 +1,47 @@
+-------Configurando URL padrão--------
+Na pasta spec_helper clico com botão direito, e clico em 'find in folder'
+digito a url padrão, sem as rotas, ex:. globo.com sem globo.com/login
+e no campo replace deixo em branco
+
+depois no spec_helper
+nas configs do Capy
+config.app_host = 'https://training-wheels-protocol.herokuapp.com'
+
+-------Redimensionando Janela---------
+nos specs, pode ser colocado no before(:each), coloco page.current_window.resize_to(1200,800)
+ou no spec_helper, no RSpec.config, coloco um 
+
+config.before(:example) do
+    page.current_window.resize_to(1280,800)
+end
+
+:example¹ -> cada it é um exemplo
+
+-------Screenshots dos specs----------
+em cada exemplos(it) colocar o codigo, automaticamente sera criado uma pasta log,
+caso não haja a pasta ainda
+
+page.save_screenshot('log/exemplo.png')
+
+ou, em cada spec, colocar, e sera criado um print de cada exemplo do spec,
+utilizando o rejex para substituir caracteres especiais por espaço ou underline
+
+after(:each) do |e|
+    nome = puts e.description.gsub(/[^A-Za-z0-9 ]/ '').tr(' ', '_')
+    page.save_screenshot('log/')+ nome + '.png')
+end
+
+tambem pode ser colocado no spec_helper no RSpec.config
+
+config.after(:example) do |e|
+    nome = puts e.description.gsub(/[^A-Za-z0-9 ]/ '').tr(' ', '_')
+    page.save_screenshot('log/')+ nome + '.png')
+end
+-------Screenshots dos specs com falha----------
+mesma configuracao no spec_helper porem se coloca um metodo exception
+
+config.after(:example) do |e|
+    nome = puts e.description.gsub(/[^A-Za-z0-9 ]/ '').tr(' ', '_')
+    page.save_screenshot('log/')+ nome + '.png') if e.exception #so vai printar se tiver alguma falha
+    puts e.exception #informa no prompt a exceção
+end

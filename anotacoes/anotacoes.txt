@@ -1,0 +1,22 @@
+No navegador colocar a jquerry $('table tbody tr');
+retorna todas as trs da page
+---
+crio uma variavel para guardar todas essas informações
+
+var = all('table tbody tr')
+
+crio outra variavel que ira detectar se dentro da variavel, parecido com um for each, e se
+tem o conteudo que eu preciso e guardo na variavel
+
+stark = atores.detect{ |ator| ator.text.include?('Robert Downey Jr')}
+
+outra opcao para tabelas
+
+usar o mesmo metodo de pegar todas as informacoes e guardar na variavel,
+porem utilizando um atributo que contenha na page
+
+var = all('table tbody tr', text: 'Chris Evans')
+
+crio outra variavel que ira receber um text de uma posicao da minha tr guardada na variavel acima
+
+var1 - var.all('td')[4].text
